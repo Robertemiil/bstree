@@ -1,7 +1,10 @@
 import node from "./node.js";
 
-const tree (arr)=>{
+const tree = (arr)=>{
     function buildTree(arr){
+        remove(arr)
+        sort(arr)
+
     }
     function sort(arr){
         let temp
