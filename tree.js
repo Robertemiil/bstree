@@ -1,30 +1,28 @@
 import node from "./node.js";
 
-const tree = (arr)=>{
-    function buildTree(arr){
-        remove(arr)
-        sort(arr)
+const tree = (arr) => {
+  arr = remove(arr);
+  arr.sort((a,b)=> a-b);
+  function buildTree(arr, start = 0, end = arr.length - 1) {
+    
+    if (start > end) return null;
+    const mid = Math.floor((start + end) / 2);
+    const root = node(arr[mid]);
 
-    }
-    function sort(arr){
-        let temp
-        for(let i = 0; i < arr.length; i++){
-           if(arr[i]>arr[i+1]){
-              temp=arr[i]
-              arr[i] = arr[i+1]
-              arr[i+1] = temp
-           }
-        }
-    }
-    function remove(arr){
-        let updated = [];
-        for(let i = 0; i < arr.length; i++){
-         if(!updated.includes(arr[i])) updated.push(arr[i])
-        }
-       return updated
-    }
-    return{
-        root : buildTree(arr)
-    }
+    root.left = buildTree(arr, start, mid - 1);
+    root.right = buildTree(arr, mid + 1, end);
+
+    return root;
+  }
+
+
+  function remove(arr) {
+  return  [...new Set(arr)]  
 }
+
+  return {
+    root: buildTree(arr),
+  };
+};
+
 export default tree;
